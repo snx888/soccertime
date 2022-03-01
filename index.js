@@ -7,11 +7,6 @@ import Navigation from "./Navigation/Navigation.js"
 import ScreenWake from "./ScreenWake/ScreenWake.js"
 import Sound from "./Sound/Sound.js"
 
-/*
-TODO
-- maybe a button to switch between synced and current time or to reset to current time
-- distinguish between ui component and "normal" module
-*/
 
 
 let view = {
@@ -165,10 +160,6 @@ document.querySelector('.button_stop')
 
 
 screen.orientation.lock("portrait")
-
-  //for testing..
- // view.start.classList.add("hidden")
-  //view.clock.classList.remove("hidden")
 
 window.addEventListener("load", () => {
     if ("serviceWorker" in navigator) {
