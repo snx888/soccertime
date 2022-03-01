@@ -1,5 +1,5 @@
 # soccertime
-a vanilla js webapp providing a timer synced to a real clock
+a vanilla js webapp providing a 5min timer synced to a real clock
 
 ### used libraries
 - [HammerJS](https://hammerjs.github.io/)
