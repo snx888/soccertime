@@ -92,7 +92,10 @@ body {
     background-attachment: fixed;
     margin: 0;
     padding: 0;
-    overflow:hidden;
+    height: 90vh;
+    width: 90vw;
+    padding: 5vh 5vw;
+    overflow: hidden;
 }
 h1,
 h2{
@@ -110,17 +113,15 @@ h2 {
 }
 
 .view {
-    height: 90vh;
-    width: 90vw;
-    padding: 5vh 5vw;
-    overflow: hidden;
+    height: 100%;
+    width: 100%;
     XXborder:1px solid #f00;
     text-align: center;
     display: flex;
     flex-direction: column;
-    align-content: space-between;
+    align-content: flex-start;
     align-items: center; /* center horizontal if column */
-    justify-content: space-between; /* center vertical if column */
+    justify-content: flex-start; /* center vertical if column */
 }
 
 .hidden {
@@ -165,13 +166,15 @@ h2 {
     transition: outline .2s ease-in-out;
     box-shadow: 0 0 1em black;
     animation: upin .2s ease-out;
+    position: fixed;
+    bottom: 5%;
 }
 .button:hover {
     outline: 3px solid var(--surface);
 }
 @keyframes upin {
     0% {
-        transform: translateY(50px);
+        transform: translateY(500px);
     }
 }
 @keyframes scalein {
@@ -200,6 +203,7 @@ h2 {
 
 .sync_slide {
     XXborder:1px solid red;
+    margin-top: 2em;
     width: 80%;
     font-weight: bold;
     text-transform: uppercase;
