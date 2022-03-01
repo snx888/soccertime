@@ -1,9 +1,17 @@
 # soccertime
 a vanilla js webapp providing a timer synced to a real clock
 
+### used libraries
+- [HammerJS](https://hammerjs.github.io/)
+- ~~[NoSleep.js](https://github.com/richtr/NoSleep.js)~~
+
+### used resources
+- Google Fonts (Indie Flower, ~~Permanent Marker, Roboto,~~ Material Icons)
+
 ### todo
-- remove not used stuff (files, css attributes, ...)
+- remove not used stuff (files, fonts, css attributes, ...)
 - service worker implementation
+- use nosleep if default api not works
 - switch between synced and current time or at least reset to current time
 - distinguish between ui component and "normal" module
 
