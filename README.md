@@ -13,6 +13,7 @@ a vanilla js webapp providing a 5min timer synced to a real clock
 - service worker implementation
 - use nosleep if default api not works
 - switch between synced and current time or at least reset to current time
+- create folder structure (ressources, modules, ..)
 - distinguish between ui component and "normal" module
 
 ### release change info
