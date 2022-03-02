@@ -8,17 +8,9 @@ a vanilla js webapp providing a 5min timer synced to a real clock
 ### used resources
 - Google Fonts (Indie Flower, ~~Permanent Marker, Roboto,~~ Material Icons)
 
-### todo
-- remove not used stuff (files, fonts, css attributes, ...)
-- service worker implementation
-- use nosleep if default api not works
-- switch between synced and current time or at least reset to current time
-- create folder structure (ressources, modules, ..)
-- distinguish between ui component and "normal" module
-
 ### release change info
 - v0.6 ...
-  - moved version info and todo to this document
+  - moved version info and todo to this document and issues
   - fix bottom button position
 - v0.5 2022/02/28
   - resize and rearrage items
