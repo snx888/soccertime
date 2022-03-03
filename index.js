@@ -1,11 +1,11 @@
-import Clock from "./Clock/Clock.js"
-import Timer from "./Timer/Timer.js"
-import ThemeSwitcher from "./ThemeSwitcher/ThemeSwitcher.js"
-import Circlebar from "./Circlebar/Circlebar.js"
-import Slidebutton from "./Slidebutton/Slidebutton.js"
-import Navigation from "./Navigation/Navigation.js"
-import ScreenWake from "./ScreenWake/ScreenWake.js"
-import Sound from "./Sound/Sound.js"
+import Clock from "./modules/Clock/Clock.js"
+import Timer from "./modules/Timer/Timer.js"
+import ThemeSwitcher from "./modules/ThemeSwitcher/ThemeSwitcher.js"
+import Circlebar from "./modules/Circlebar/Circlebar.js"
+import Slidebutton from "./modules/Slidebutton/Slidebutton.js"
+import Navigation from "./modules/Navigation/Navigation.js"
+import ScreenWake from "./modules/ScreenWake/ScreenWake.js"
+import Sound from "./modules/Sound/Sound.js"
 
 
 
@@ -28,8 +28,8 @@ let obj = {
   timer: new Timer(),
   screenwake: new ScreenWake(),
   sound: new Sound([
-    { id: 'end', url: './end.mp3' },
-    { id: 'tick', url: './tick.mp3' }
+    { id: 'end', url: './res/end.mp3' },
+    { id: 'tick', url: './res/tick.mp3' }
   ]),
   cirlcebar: new Circlebar(document.querySelector(".timer_circle"))
 }

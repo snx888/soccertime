@@ -3,12 +3,12 @@
   "short_name": "soccertime",
   "icons": [
     {
-      "src": "./soccertime.png",
+      "src": "./res/soccertime.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "./soccertime_512.png",
+      "src": "./res/soccertime_512.png",
       "sizes": "512x512",
       "type": "image/png"
     }

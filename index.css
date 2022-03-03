@@ -4,10 +4,10 @@
 /*@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Roboto&family=Source+Sans+Pro&display=swap');
 */
 @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=Permanent+Marker&display=swap');
-@import url('./Clock/Clock.css');
-@import url('./Circlebar/Circlebar.css');
-@import url('./ThemeSwitcher/ThemeSwitcher.css');
-@import url('./Slidebutton/Slidebutton.css');
+@import url('./modules/Clock/Clock.css');
+@import url('./modules/Circlebar/Circlebar.css');
+@import url('./modules/ThemeSwitcher/ThemeSwitcher.css');
+@import url('./modules/Slidebutton/Slidebutton.css');
 
 :root {
     --primary: Brown;
@@ -114,7 +114,8 @@ h2 {
 
 .view {
     height: 100%;
-    width: 100%;
+    width: 100%;
+
     XXborder:1px solid #f00;
     text-align: center;
     display: flex;
