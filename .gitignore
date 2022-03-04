@@ -1,0 +1,9 @@
+# ignore .vscode launch options
+.vscode/
+#ignore some additional info placed in a specific .local folder
+.local/
+# ignore github default files (license and readme)
+LICENSE
+README.md
+# ignore this file itself
+#.gitignore

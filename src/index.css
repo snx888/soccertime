@@ -1,0 +1,277 @@
+/*@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Source+Sans+Pro&display=swap');
+*/
+/*@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Roboto&family=Source+Sans+Pro&display=swap');
+*/
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=Permanent+Marker&display=swap');
+@import url('./modules/Clock/Clock.css');
+@import url('./modules/Circlebar/Circlebar.css');
+@import url('./modules/ThemeSwitcher/ThemeSwitcher.css');
+@import url('./modules/Slidebutton/Slidebutton.css');
+
+:root {
+    --primary: Brown;
+    --onPrimary: Snow;
+    /*--secondary: #694442;
+    --onSecondary: #221a1a;
+    --tertiary: #818cab;
+    --onTertiary: #161625;*/
+    --background: rgb(22, 23, 24);
+    --onBackground: Silver;
+    --surface: Silver;
+    --onSurface: #222324;
+    --base: black;
+}
+[data-theme="turquoise"] {
+    --primary: #5baeb4;
+    --onPrimary: #000;
+    --secondary: hsla(0,0%,100%,.5);
+    --onSecondary: #000;
+    --background: #151a21;
+    --onBackground: #fff;
+    --surface: rgb(35, 56, 62);
+    --onSurface: rgb(136, 168, 167);
+    --base: black;
+}
+[data-theme="firebrick"] {
+    --primary: Firebrick;
+}
+[data-theme="skyblue"] {
+    --primary: Skyblue;
+    --onPrimary: #000;
+}
+[data-theme="orchid"] {
+    --primary: Orchid;
+    --onPrimary: #000;
+}
+[data-theme="tan"] {
+    --primary: Tan;
+    --onPrimary: #000;
+}
+[data-theme="brown"] {
+    --primary: #a33d23;
+}
+[data-theme="pastel"] {
+    --primary: #006784;
+}
+[data-theme="red"] {
+    --primary: Tomato;
+}
+[data-theme="blue"] {
+    --primary: DodgerBlue;
+}
+[data-theme="cyan"] {
+    --primary: #219EBC;
+}
+[data-theme="gold"] {
+    --primary: Orange;
+    --onPrimary: #000;
+}
+[data-theme="green"] {
+    --primary: MediumSeaGreen;
+}
+[data-theme="purple"] {
+    --primary: SlateBlue;
+}
+[data-theme="violet"] {
+    --primary: Violet;
+    --onPrimary: #000;
+}
+
+html {
+    margin: 0;
+    padding: 0;
+}
+body {
+    XXfont-family: 'Source Sans Pro', 'Roboto', Calibri, sans-serif;
+    font-family: 'Indie Flower', Calibri, sans-serif;
+    color: var(--onBackground);
+    XXbackground: var(--background);
+    background: linear-gradient(var(--background), var(--background) 70%, var(--base));
+    XXbackground: radial-gradient(var(--background), var(--base));
+    background-attachment: fixed;
+    margin: 0;
+    padding: 0;
+    height: 90vh;
+    width: 90vw;
+    padding: 5vh 5vw;
+    overflow: hidden;
+}
+h1,
+h2{
+    margin: 0;
+    text-transform: uppercase;
+    text-shadow: 0 0 0.5em black;
+}
+h1 {
+    /*opacity: .05;
+    letter-spacing: 2px;
+    font-family: 'Permanent Marker';*/
+}
+h2 {
+    font-weight: normal;
+}
+
+.view {
+    height: 100%;
+    width: 100%;
+
+    XXborder:1px solid #f00;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    align-items: center; /* center horizontal if column */
+    justify-content: flex-start; /* center vertical if column */
+}
+
+.hidden {
+    display: none;
+}
+
+.state {
+    position: fixed;
+    bottom: .5em;
+    left: .5em;
+    display: flex;
+    cursor: pointer;
+    XXborder: 1px solid red;
+}
+.state_screenwake span,
+.state_sound span {
+    opacity: .1;
+}
+.version {
+    font-family: Calibri, sans-serif;
+    opacity: .2;
+    font-size: 10px;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+}
+
+/* button style */
+
+.button {
+    width: 100px;
+    height: 50px;
+    background: var(--surface);
+    color: var(--onSurface);
+    font-family: inherit;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 10px;
+    outline: 0 solid transparent;
+    cursor: pointer;
+    transition: outline .2s ease-in-out;
+    box-shadow: 0 0 1em black;
+    animation: upin .2s ease-out;
+    position: fixed;
+    bottom: 5%;
+}
+.button:hover {
+    outline: 3px solid var(--surface);
+}
+@keyframes upin {
+    0% {
+        transform: translateY(500px);
+    }
+}
+@keyframes scalein {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+}
+@keyframes fadein {
+    0% {
+        opacity: 0;
+    }
+}
+
+/* clock view */
+
+.sync_clock {
+    margin-top: 5%;
+    XXborder:1px solid red;
+    width: 80%;
+    padding-right: 8px;
+    animation: scalein .2s ease-out;
+}
+
+/* clock sync slide button */
+
+.sync_slide {
+    XXborder:1px solid red;
+    margin-top: 2em;
+    width: 80%;
+    font-weight: bold;
+    text-transform: uppercase;
+    animation: fadein .2s ease-out;
+}
+.sync_slide .text {
+    margin: 0 1em;
+}
+.arrow {
+    opacity: 0;
+    animation: blink 1.8s ease-in-out infinite;
+    vertical-align: middle;
+    transform: translateY(-.1em);
+    transition: margin .3s ease-in-out;
+  }
+.arrow3 {
+    animation-delay: 0s;
+}
+.arrow2 {
+    animation-delay: .2s;
+}
+.arrow1 {
+    animation-delay: .4s;
+}
+@keyframes blink {
+    from {
+        opacity: 0;
+    }
+    50% {
+        opacity: .8;
+    }
+    to {
+        opacity: 0;
+    }
+}
+.button_start {
+    color: var(--onPrimary) !important;
+    background: var(--primary) !important;
+}
+.button_start:hover {
+    outline-color: var(--primary);
+}
+
+/* timer view */
+
+.timer {
+    width: 80%;
+    margin-top: 5%;
+    XXborder: 1px solid red;
+    position: relative;
+    animation: scalein .2s ease-out;
+}
+.timer_circle {
+    XXborder:1px solid seagreen;
+    XXwidth: 80%;
+    XXheight: 300px;
+}
+.timer_text {
+    font-size: 70px;
+    font-weight: bold;
+    position: absolute;
+    XXborder: 1px solid green;
+    width: 100%;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.timer_text span {
+    margin: 0 5px;
+}
