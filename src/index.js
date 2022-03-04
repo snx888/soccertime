@@ -1,11 +1,11 @@
-import Clock from "./src/res/modules/Clock/Clock.js"
-import Timer from "./src/res/modules/Timer/Timer.js.js"
-import ThemeSwitcher from "./src/res/modules/ThemeSwitcher/ThemeSwitcher.js.js"
-import Circlebar from "./src/res/modules/Circlebar/Circlebar.js.js"
-import Slidebutton from "./src/res/modules/Slidebutton/Slidebutton.js"
-import Navigation from "./src/res/modules/Navigation/Navigation.js.js"
-import ScreenWake from "./src/res/modules/ScreenWake/ScreenWake.js.js"
-import Sound from "./src/res/modules/Sound/Sound.js"
+import Clock from "./modules/Clock/Clock.js"
+import Timer from "./modules/Timer/Timer.js"
+import ThemeSwitcher from "./modules/ThemeSwitcher/ThemeSwitcher.js"
+import Circlebar from "./modules/Circlebar/Circlebar.js"
+import Slidebutton from "./modules/Slidebutton/Slidebutton.js"
+import Navigation from "./modules/Navigation/Navigation.js"
+import ScreenWake from "./modules/ScreenWake/ScreenWake.js"
+import Sound from "./modules/Sound/Sound.js"
 
 
 
