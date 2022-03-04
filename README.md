@@ -12,8 +12,8 @@ a vanilla js webapp providing a 5min timer synced to a real clock
 
 ### used libraries and ressources
 - [HammerJS](https://hammerjs.github.io/)
-- ~~[NoSleep.js](https://github.com/richtr/NoSleep.js)~~
 - [Google Fonts](https://fonts.google.com/) (Indie Flower, ~~Permanent Marker, Roboto,~~ Material Icons)
+- ~~[NoSleep.js](https://github.com/richtr/NoSleep.js)~~
 
 ### release change info
 - v0.6 ...
