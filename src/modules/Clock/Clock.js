@@ -16,6 +16,7 @@ export default class Clock {
         minutes: -1,
         seconds: -1
     }
+    #interval = null
     #pause = false
     #listener = {
         tick: []
@@ -30,13 +31,19 @@ export default class Clock {
             seconds: root.querySelector(".clock__seconds")
         }
         //console.log("act date:",new Date())
-        const offset = parseInt(localStorage.getItem(this.#localStorageName) || 0)
-        console.log("load offset:",offset)
-        if (offset !== 0) this.#date = new Date(this.#date.getTime() + offset)
-        //console.log("offset date:",this.#date)
-        this.#date2Time()
-        this.#tick()
-        setInterval(() => { this.#tick() }, 1000)
+        this.#resetDate()
+        //reset time cause it could be wrong(old) due to e.g. screenoff
+        window.addEventListener("focus", () => {
+            /*const s1 = parseInt((this.#date.getTime() 
+            + (1000 * this.#secsSinceDate)) / 1000),
+            p1 = this.#secsSinceDate*/
+            this.#resetDate()
+            /*const s2 = parseInt((this.#date.getTime() 
+            + (1000 * this.#secsSinceDate)) / 1000),
+            p2 = this.#secsSinceDate,
+            d = s2 - s1
+            console.log("focus", d, s1, p1, s2, p2)*/
+        })
     }
 
     getDate() {
@@ -45,9 +52,12 @@ export default class Clock {
         )
     }
     setDate(date) {
+        // set time
         this.#date = date
         this.#secsSinceDate = 0
-        localStorage.setItem(this.#localStorageName, 0)
+        // save offset between set and current time
+        this.#saveOffset()
+        // update ui immediately (do not wait 1 sec)
         this.#date2Time()
         this.#updateUI()
     }
@@ -56,10 +66,12 @@ export default class Clock {
     }
 
     addMilliSeconds(x) {
+        // set time
         this.#date = new Date(
             this.#date.getTime() + (1000 * this.#secsSinceDate + x)
         )
         this.#secsSinceDate = 0
+        // update ui immediately (do not wait 1 sec)
         this.#date2Time()
         this.#updateUI()
     }
@@ -69,10 +81,37 @@ export default class Clock {
     }
 
     continue() {
-        const offset = new Date().getTime() - this.#date.getTime()
-        //console.log("time offset:", offset, this.#date)
-        localStorage.setItem(this.#localStorageName, offset)
+        // save offset between set and current time
+        this.#saveOffset()
         this.#pause = false
+    }
+
+    #resetDate() {
+        //console.log("clock:resetDate()")
+        clearInterval(this.#interval)
+        // set current time
+        this.#date = new Date()
+        this.#secsSinceDate = 0
+        // get offset from local storage andd add to current time
+        this.#loadOffset()
+        // update ui immediately (do not wait 1 sec)
+        this.#date2Time()
+        this.#tick()
+        // update each second from now..
+        this.#interval = setInterval(() => { this.#tick() }, 1000)
+    }
+
+    #saveOffset() {
+        const offset = new Date().getTime() - this.#date.getTime()
+        console.log("save offset:", offset, this.#date)
+        localStorage.setItem(this.#localStorageName, offset)
+    }
+
+    #loadOffset() {
+        const offset = parseInt(localStorage.getItem(this.#localStorageName) || 0)
+        console.log("load offset:",offset)
+        if (offset !== 0) this.#date = new Date(this.#date.getTime() + offset)
+        //console.log("offset date:",this.#date)
     }
 
     #date2Time() {
