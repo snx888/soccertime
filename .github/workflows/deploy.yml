@@ -1,4 +1,4 @@
-name: Copy folder to other branch
+name: Deploy (/src to gh-pages)
 
 on: 
   # Triggers the workflow on push events but only for the main branch
@@ -11,7 +11,7 @@ on:
 jobs:
  # This workflow contains a single job called "copy"
   copy:
-    name: Copy my folder
+    name: Copy folder to branch
     runs-on: ubuntu-latest
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
