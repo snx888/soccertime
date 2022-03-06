@@ -103,13 +103,13 @@ export default class Clock {
 
     #saveOffset() {
         const offset = new Date().getTime() - this.#date.getTime()
-        console.log("save offset:", offset, this.#date)
+        //console.log("save offset:", offset, this.#date)
         localStorage.setItem(this.#localStorageName, offset)
     }
 
     #loadOffset() {
         const offset = parseInt(localStorage.getItem(this.#localStorageName) || 0)
-        console.log("load offset:",offset)
+        //console.log("load offset:",offset)
         if (offset !== 0) this.#date = new Date(this.#date.getTime() + offset)
         //console.log("offset date:",this.#date)
     }
