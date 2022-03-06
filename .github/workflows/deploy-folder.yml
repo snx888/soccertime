@@ -1,4 +1,4 @@
-name: Deploy folder (/src to gh-pages)
+name: Deploy folder (/src to gh-pages/src)
 
 on: 
   # Triggers the workflow on push events but only for the main branch
