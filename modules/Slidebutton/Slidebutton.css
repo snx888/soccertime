@@ -1,0 +1,21 @@
+.slidebutton__container {
+    XXborder: 2px dotted var(--onBackground);
+    background: var(--surface);
+    color: var(--onSurface);
+    display: inline-block;
+    min-height: 1em;
+    min-width: 1em;
+    height: calc(100% - 2em);
+    width: calc(100% - 4em);
+    padding: 1em 2em;
+    line-height: 2em;
+    border-radius: 10px;
+    box-shadow: 0 0 1em black;
+    cursor: pointer;
+    transition: transform .2s ease-in-out;
+    transform: scale(1.02);
+}
+.slidebutton__container:hover,
+.slidebutton__container:active {
+    transform: scale(1.05);
+}
