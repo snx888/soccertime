@@ -1,4 +1,4 @@
-name: Deploy Site
+name: Deploy Site (/src to gh-pages)
 
 on:
   workflow_dispatch:
