@@ -18,7 +18,9 @@ a vanilla js webapp providing a 5min timer synced to a real clock
 - ~~[NoSleep.js](https://github.com/richtr/NoSleep.js)~~
 
 ### release change info
-- v0.6 ...
+- v0.7 ...
+- v0.6 2022/03/06
+  - fixed issue #008 (timeout stop/delay on device sleep)
   - folder structure rearranged
   - moved version info and todo to this document and issues
   - fix bottom button position
