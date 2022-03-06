@@ -1,6 +1,8 @@
 # soccertime
 a vanilla js webapp providing a 5min timer synced to a real clock
 
+[live site](https://snx888.github.io/soccertime/)
+
 ### functionality
 - display analog clock
 - manipulate time by swipe
