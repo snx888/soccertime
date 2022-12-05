@@ -1,0 +1,7 @@
+.timer__time {
+    color: var(--onPrimary);
+    font-size: 10em;
+    font-weight: bold;
+    min-width: 280px; /* max width with biggest letters*/
+    transform: translateY(-9px); /* correct letter position within line */
+}
