@@ -24,7 +24,7 @@ export default class {
 
         this.#el = {
             root: root,
-            teams: root.querySelector(".teams__container"),
+            teams: root.querySelector('.teams__container'),
         }
 
         models.round.on('team', teams => {

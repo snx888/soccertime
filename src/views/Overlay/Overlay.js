@@ -22,7 +22,6 @@ export default class {
 
         this.#el = {
             root: root,
-            state: root.querySelector('.overlay__state'),
             version: root.querySelector('.overlay__version'),
             screenwake: root.querySelector('.overlay__state .state_screenwake span'),
             sound: root.querySelector('.overlay__state .state_sound span'),
@@ -32,6 +31,8 @@ export default class {
             game: root.querySelector('.overlay__state .state_game'),
             part: root.querySelector('.overlay__state .state_part')
         }
+
+        if (!DEV) root.querySelector('.overlay__state').style.display = 'none'
 
         this.#el.version.textContent = VERSION + (DEV ? ' (dev)' : '')
         this.#el.screenwake.textContent = models.screenwake.isSupported()
@@ -75,17 +76,10 @@ export default class {
         })
 
         this.#updateRound(models.round.getInfo())
-        /*root.querySelector('.test')
-            .addEventListener('click', () => {
-                models.round.start()
-            })*/
     }
 
     #updateRound (e) {
-        if (!DEV) {
-            this.#el.state.style.display = 'none'
-            return
-        }
+        if (!DEV) return
         //console.log('update overlay round', e)
         if (e.round) e.opacity = '.4'
         else e.opacity = '.1'

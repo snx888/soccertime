@@ -28,7 +28,7 @@ export default class {
 
         this.#el = {
             root: root,
-            container: root.querySelector(".slider__container")
+            container: root.querySelector('.slider__container')
         }
 
         this.#el.container.addEventListener('touchstart', this.#handleTouchStart, false)
@@ -38,12 +38,12 @@ export default class {
 
     #handleTouchStart = evt => {
         this.#eStart = evt.touches[0]
-        this.#emit("start")
+        this.#emit('start')
     }
 
     #handleTouchEnd = evt => {
         this.#eStart = null
-        this.#emit("stop")
+        this.#emit('stop')
     }
 
     #handleTouchMove = evt => {
@@ -54,7 +54,7 @@ export default class {
             y: this.#eStart.clientY - evt.touches[0].clientY
         }
         //console.log(diff)
-        this.#emit("move", diff)
+        this.#emit('move', diff)
     }
 
     on (event, func) {

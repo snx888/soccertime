@@ -22,7 +22,7 @@ export default class {
 
         this.#el = {
             root: root,
-            time: root.querySelector(".timer__time"),
+            time: root.querySelector('.timer__time'),
         }
 
         models.timer.on('start', counter => {

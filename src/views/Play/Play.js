@@ -1,3 +1,4 @@
+import { DEV } from '../../settings.js'
 import models from '../../models/index..js'
 import Timer from '../../components/Timer/Timer.js'
 import Games from '../../components/Games/Games.js'
@@ -24,25 +25,28 @@ export default class {
 
         this.#el = {
             root: root,
-            bar: root.querySelector(".round__bar")
+            bar: root.querySelector('.round__bar'),
+            buttonTimer: root.querySelector('.round__button_timer')
         }
         
-        new Timer(root.querySelector(".round__timer"))
-        new Games(root.querySelector(".round__games"))
-        new Teams(root.querySelector(".round__teams"))
+        if (!DEV) this.#el.buttonTimer.style.display = 'none'
 
-        root.querySelector(".round__button_stop")
-            .addEventListener("click", () => {
+        new Timer(root.querySelector('.round__timer'))
+        new Games(root.querySelector('.round__games'))
+        new Teams(root.querySelector('.round__teams'))
+
+        root.querySelector('.round__button_stop')
+            .addEventListener('click', () => {
                 models.round.playing = false
                 models.navigator.navigateBack()
             })
-        root.querySelector(".round__button_timer")
-            .addEventListener("click", () => {
-                models.timer.setTo5()
+        root.querySelector('.round__button_players')
+            .addEventListener('click', () => {
+                models.navigator.navigate('players')
             })
-        root.querySelector(".round__button_players")
-            .addEventListener("click", () => {
-                models.navigator.navigate("players")
+        this.#el.buttonTimer
+            .addEventListener('click', () => {
+                models.timer.setTo5()
             })
 
         models.timer.on('start', counter => {
