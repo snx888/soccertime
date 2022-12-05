@@ -143,7 +143,7 @@ models.timer.startIfNotRunning(models.clock.getTime())
 
 
 window.addEventListener("load", () => {
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("service-worker.js")
+    if ("serviceWorker" in window.navigator) {
+		window.navigator.serviceWorker.register("service-worker.js")
     }
 })
