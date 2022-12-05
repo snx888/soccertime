@@ -35,12 +35,13 @@ export default class {
         if (!DEV) root.querySelector('.overlay__state').style.display = 'none'
 
         this.#el.version.textContent = VERSION + (DEV ? ' (dev)' : '')
-        this.#el.screenwake.textContent = models.screenwake.isSupported()
-            ? 'web_asset' //'lock'
-            : 'web_asset_off' //'lock_open'
 
+        models.screenwake.on('test', successfull => {
+            this.#el.screenwake.textContent = successfull ? 'web_asset' :'web_asset_off'
+        })
+    
         // react to screenwake changes
-        models.screenwake.on(locked => {
+        models.screenwake.on('state', locked => {
             this.#el.screenwake.style.opacity = locked
                 ? '.4'
                 : '.1'

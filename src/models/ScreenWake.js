@@ -1,44 +1,52 @@
 export default class ScreenWake {
 
-    #supported = false
+    #enabled = false
     #lock = null
-    #listener
+    #listener = {
+        test: [],
+        state: []
+    }
+    #noSleep = new NoSleep()
 
     constructor () {
-        if ('wakeLock' in navigator) {
-            // Screen Wake Lock API supported
-            //console.log('wake lock supported')
-            this.#supported = true
-        }
+        // before first interaction the browser will prevent audio 
+        // playback and raise an exception, so let's check
+        // at the first click..
+        document.addEventListener('click', () => {
+            //console.log('sound audio test')
+            this.#noSleep.enable().then(r => {
+                this.#emit('test', true)
+                this.#enabled = true
+            }).catch(e => {
+                this.#emit('test', false)
+            })
+        }, {once: true})
     }
 
-    async lock () {
-        if (!this.#supported) return
-        try {
-            this.#lock = await navigator.wakeLock.request()
-            this.#lock.addEventListener('release', () => {
-                //console.log('wake lock released')
-                if (this.#listener) this.#listener(false)
-            })
-            //console.log("wake lock enabled - release status:", this.#lock.released)
-            if (this.#listener) this.#listener(true)
-        } catch (err) {
-            //console.error("wake lock ERROR", `${err.name}, ${err.message}`)
-        }
+    lock () {
+        if (!this.#enabled) return
+        this.#noSleep.enable()
+        this.#lock = true
+        this.#emit('state', true)
     }
 
     unlock () {
         if (!this.#lock) return
-        this.#lock.release()
+        this.#noSleep.disable()
         this.#lock = null
+        this.#emit('state', false)
     }
 
-    on (listener) {
-        this.#listener = listener
+    on (event, func) {
+        if (!this.#listener[event]) return
+        this.#listener[event].push(func)
     }
-    
-    isSupported () {
-        return this.#supported
+
+    #emit (event, ...params) {
+        if (!this.#listener[event]) return
+        this.#listener[event].forEach(func => {
+            func(...params)
+        })
     }
-    
+
 }

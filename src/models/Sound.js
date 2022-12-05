@@ -1,6 +1,6 @@
 export default class Sound {
     
-    #test = new Audio("./res/test.mp3") //250ms silence
+    #test = new Audio('./res/test.mp3') //250ms silence
     #enabled = false //set true after first user interaction
     #sounds = []
     #listener = {
@@ -18,19 +18,19 @@ export default class Sound {
         this.#sounds.forEach(sound => {
             sound.obj = new Audio(sound.url)
             sound.obj.onended = function () {
-                this.#emit("end", sound.id)
+                this.#emit('end', sound.id)
             }.bind(this)
         })
         // before first interaction the brwoser will prevent audio 
         // playback and raise an exception, so let's check
         // at the first click..
-        document.addEventListener("click", () => {
+        document.addEventListener('click', () => {
             //console.log('sound audio test')
             this.#test.play().then(r => {
-                this.#emit("test", true)
+                this.#emit('test', true)
                 this.#enabled = true
             }).catch(e => {
-                this.#emit("test", false)
+                this.#emit('test', false)
             })
         }, {once: true})
     }
@@ -53,7 +53,7 @@ export default class Sound {
     #play (sounds) {
         sounds.forEach(s => {
             s.obj.play().then(() => {
-                this.#emit("start", s.id)
+                this.#emit('start', s.id)
             })
         })
     }
@@ -61,7 +61,7 @@ export default class Sound {
     #pause (sounds) {
         sounds.forEach(s => {
             s.obj.pause()
-            this.#emit("pause", s.id)
+            this.#emit('pause', s.id)
         })
     }
 
@@ -69,7 +69,7 @@ export default class Sound {
         sounds.forEach(s => {
             s.obj.pause()
             s.obj.currentTime = 0
-            this.#emit("stop", s.id)
+            this.#emit('stop', s.id)
         })
     }
 

@@ -1,6 +1,6 @@
 export default class Clock {
 
-    #localStorageName = "soccertime_clockOffset"
+    #localStorageName = 'soccertime_clockOffset'
     #offset = 0
     #date = new Date()
     #time = {}
@@ -26,9 +26,9 @@ export default class Clock {
         // do not get current time in adjust mode..
         if (this.#dateAdjustBase === null) this.#getDate()
         return {
-            hours: this.#time.hours.toString().padStart(2, "0"),
-            minutes: this.#time.minutes.toString().padStart(2, "0"),
-            seconds: this.#time.seconds.toString().padStart(2, "0")
+            hours: this.#time.hours.toString().padStart(2, '0'),
+            minutes: this.#time.minutes.toString().padStart(2, '0'),
+            seconds: this.#time.seconds.toString().padStart(2, '0')
         }
     }
 
@@ -58,7 +58,7 @@ export default class Clock {
         //console.clear()
         //console.log('real:', new Date())
         //console.log('set:', this.#date)
-        this.#emit("changed", this.#time)
+        this.#emit('changed', this.#time)
     }
 
     clearOffset () {
@@ -66,7 +66,7 @@ export default class Clock {
         this.#saveOffset()
         this.#getDate()
         //console.log('offset:', this.#offset)
-        this.#emit("changed", this.#time)
+        this.#emit('changed', this.#time)
     }
 
     #getDate () {
@@ -89,13 +89,13 @@ export default class Clock {
     }
 
     #saveOffset () {
-        //console.log("save offset:", this.#offset, this.#date)
+        //console.log('save offset:', this.#offset, this.#date)
         localStorage.setItem(this.#localStorageName, this.#offset)
     }
 
     #loadOffset () {
         this.#offset = parseInt(localStorage.getItem(this.#localStorageName) || 0)
-        //console.log("load offset:", this.#offset)
+        //console.log('load offset:', this.#offset)
     }
 
 

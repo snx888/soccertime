@@ -34,8 +34,6 @@ models.sound = new ModelSound([
 ])
 
 
-/*TODO use silent audio to force screen on*/
-
 
 // define views ..
 const views = {

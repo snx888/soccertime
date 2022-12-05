@@ -2,7 +2,7 @@ import models from './index..js'
 
 export default class Round {
 
-    #localStorageName = "soccertime_round"
+    #localStorageName = 'soccertime_round'
     #round
     #game
     #part
