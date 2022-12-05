@@ -15,7 +15,7 @@ export default class Navigator {
         window.history.back()
     }
     navigate (target) {
-        //console.log("navigate:", target)
+        //console.log('navigate:', target)
         window.location = '#'+target
     }
     getCurrent () {
@@ -23,13 +23,13 @@ export default class Navigator {
     }
 
     #onHashChange (e) {
-        const hashIndex = e.newURL.indexOf("#")
-        const hash = hashIndex < 0 ? "" : e.newURL.substring(hashIndex+1)
-        //console.log("onHashChange", e, hashIndex, hash)
+        const hashIndex = e.newURL.indexOf('#')
+        const hash = hashIndex < 0 ? '' : e.newURL.substring(hashIndex+1)
+        //console.log('onHashChange', e, hashIndex, hash)
         this.#onNavigate(hash)
     }
     #onNavigate (target) {
-        //console.log("onNavigate:", target)
+        //console.log('onNavigate:', target)
         let destination = this.#nav.filter(item => item === target)
         if (destination.length === 0) {
             destination = [this.#nav[0]] //take the first one as default.. 

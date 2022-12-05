@@ -22,7 +22,7 @@ export default class {
 
         this.#el = {
             root: root,
-            parts: root.querySelector(".games__parts"),
+            parts: root.querySelector('.games__parts'),
         }
 
         models.round.on('part', e => {

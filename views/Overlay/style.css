@@ -12,9 +12,9 @@
     opacity: .1;
 }
 .overlay__version {
-    opacity: .2;
+    opacity: .3;
     font-size: 10px;
     position: fixed;
-    top: 0;
-    right: 0;
+    top: 5px;
+    right: 5px;
 }

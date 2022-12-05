@@ -22,14 +22,14 @@ export default class Timer {
         this.stop()
         this.#interval = setInterval(() => {
             this.#counter--
-            this.#emit("tick", this.#counter)
+            this.#emit('tick', this.#counter)
             if (this.#counter === 0) {
                 if (this.#options.infinite) {
                     this.#counter = this.#options.duration
                 } else this.stop()
             }
         }, 1000)
-        this.#emit("start", this.#counter)
+        this.#emit('start', this.#counter)
     }
 
     startIfNotRunning (time) {
@@ -40,25 +40,25 @@ export default class Timer {
     stop () {
         clearInterval(this.#interval)
         this.#interval = null
-        this.#emit("stop")
+        this.#emit('stop')
     }
 
     sync (time) {
         this.#syncClock(time)
-        this.#emit("tick", this.#counter)
+        this.#emit('tick', this.#counter)
     }
 
     setTo5 () {
         this.#counter = 5
-        this.#emit("tick", this.#counter)
+        this.#emit('tick', this.#counter)
     }
 
     getReadableTime () {
         let minutes = Math.floor(this.#counter / 60)
         let seconds = this.#counter % 60
         //if (formatted) {
-            minutes = minutes.toString().padStart(1, "0"),
-            seconds = seconds.toString().padStart(2, "0")
+            minutes = minutes.toString().padStart(1, '0'),
+            seconds = seconds.toString().padStart(2, '0')
         //}
         return {
             minutes: minutes,
@@ -70,7 +70,7 @@ export default class Timer {
         //console.log(time)
         const remainingSeconds = 60 - time.seconds
         const remainingMinutes = 4 - time.minutes % 5
-        //console.log(time.minutes+":"+time.seconds, remainingMinutes+":"+remainingSeconds, (time.minutes+remainingMinutes)+":"+(time.seconds+remainingSeconds))
+        //console.log(time.minutes+':'+time.seconds, remainingMinutes+':'+remainingSeconds, (time.minutes+remainingMinutes)+':'+(time.seconds+remainingSeconds))
         this.#counter = remainingSeconds + remainingMinutes * 60
     }
 

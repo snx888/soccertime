@@ -22,13 +22,13 @@ export default class {
 
         this.#el = {
             root: root,
-            container: root.querySelector(".player__container"),
-            list: root.querySelector(".player__list"),
-            new: root.querySelector(".player__input_name")
+            container: root.querySelector('.player__container'),
+            list: root.querySelector('.player__list'),
+            new: root.querySelector('.player__input_name')
         }
 
-        root.querySelector(".player__button_back")
-            .addEventListener("click", () => {
+        root.querySelector('.player__button_back')
+            .addEventListener('click', () => {
                 if (this.#manageMode) {
                     this.#manageMode = false
                     this.#el.container.classList.remove('manageMode')
@@ -39,16 +39,16 @@ export default class {
         this.#el.new.addEventListener('keyup', e => {
             if (e.key === 'Enter') this.#newPlayer()
         })
-        root.querySelector(".player__button_add")
+        root.querySelector('.player__button_add')
             .addEventListener('click', e => {
                 this.#newPlayer()
             })
-        root.querySelector(".player__button_manage")
+        root.querySelector('.player__button_manage')
             .addEventListener('click', e => {
                 this.#manageMode = true
                 this.#el.container.classList.add('manageMode')
             })
-        root.querySelector(".player__button_teams")
+        root.querySelector('.player__button_teams')
             .addEventListener('click', e => {
                 this.#el.container.classList.remove('buildMode')
                 models.navigator.navigateBack()
