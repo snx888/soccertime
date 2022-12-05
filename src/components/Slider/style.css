@@ -1,0 +1,7 @@
+.slider__container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: var(--primary);
+}

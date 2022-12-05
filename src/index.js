@@ -1,168 +1,149 @@
-import Clock from "./modules/Clock/Clock.js"
-import Timer from "./modules/Timer/Timer.js"
-import ThemeSwitcher from "./modules/ThemeSwitcher/ThemeSwitcher.js"
-import Circlebar from "./modules/Circlebar/Circlebar.js"
-import Slidebutton from "./modules/Slidebutton/Slidebutton.js"
-import Navigation from "./modules/Navigation/Navigation.js"
-import ScreenWake from "./modules/ScreenWake/ScreenWake.js"
-import Sound from "./modules/Sound/Sound.js"
+import Idle from "./views/Idle/Idle.js"
+import Player from "./views/Player/Player.js"
+import Play from "./views/Play/Play.js"
+import Overlay from "./views/Overlay/Overlay.js"
+
+import { PLAYERS } from "./settings.js"
+
+import ModelClock from './models/Clock.js'
+import ModelPlayers from './models/Players.js'
+import ModelScreenWake from './models/ScreenWake.js'
+import ModelSound from './models/Sound.js'
+import ModelTimer from './models/Timer.js'
+import ModelNavigator from './models/Navigator.js'
+import ModelRound from './models/Round.js'
+
+import models from './models/index..js'
 
 
+localStorage.clear()
 
-let view = {
-  error: document.querySelector('.view_error'),
-  clock: document.querySelector('.view_sync'),
-  timer: document.querySelector('.view_timer')
-}
-let el = {
-  timer_text: document.querySelector(".timer_text"),
-  log: document.querySelector(".log"),
-  themeswitcher: document.querySelector(".themeswitcher"),
-  screenwake: document.querySelector(".state_screenwake span"),
-  sound: document.querySelector(".state_sound span")
-}
-let obj = {
-  themeswitcher: new ThemeSwitcher(document.querySelector(".themeswitcher")),
-  clock: new Clock(document.querySelector(".sync_clock")),
-  slidebutton: new Slidebutton(document.querySelector(".sync_slide")),
-  timer: new Timer(),
-  screenwake: new ScreenWake(),
-  sound: new Sound([
+// dedfine models ..
+models.navigator = new ModelNavigator([
+	'idle', 'players', 'play'
+])
+models.clock = new ModelClock()
+models.players = new ModelPlayers(PLAYERS)
+/*TODO 300 sekunden via settings*/
+models.timer = new ModelTimer()
+models.round = new ModelRound()
+models.screenwake = new ModelScreenWake()
+/*TODO via settings*/
+models.sound = new ModelSound([
     { id: 'end', url: './res/end.mp3' },
     { id: 'tick', url: './res/tick.mp3' }
-  ]),
-  cirlcebar: new Circlebar(document.querySelector(".timer_circle"))
-}
-
-obj.themeswitcher.setRandomTheme()
-
-// hide things in production..
-if (window.location.pathname.indexOf("/dev") < 0) {
-  el.themeswitcher.style.display = "none"
-}
-
-// react to screenwake changes
-el.screenwake.textContent = obj.screenwake.isSupported()
-  ? 'web_asset' //'lock'
-  : 'web_asset_off' //'lock_open'
-obj.screenwake.on(locked => {
-  el.screenwake.style.opacity = locked
-    ? '.4'
-    : '.1'
-})
-
-// set audio test
-obj.sound.on("test", successfull => {
-  el.sound.textContent = successfull ? 'volume_up' :'volume_off'
-})
-obj.sound.on("start", id => {
-  //console.log("play sound", id)
-  el.sound.style.opacity = '.4'
-})
-obj.sound.on("end", id => {
-  //console.log("end sound", id)
-  el.sound.style.opacity = '.1'
-})
-obj.sound.on("stop", id => {
-  //console.log("stop sound", id)
-  el.sound.style.opacity = '.1'
-})
-
-
-obj.timer.on("start", counter => {
-  //console.log("timer start")
-  obj.cirlcebar.setProgress(counter / 300 * 100)
-  const text = obj.timer.getCounterText(true)
-  el.timer_text.innerHTML = text.minutes + "<span>:</span>" + text.seconds
-  obj.screenwake.lock()
-})
-obj.timer.on("tick", counter => {
-  //console.log("tick: ", counter)
-  //if ((counter-3)%10 === 0) {
-  if (counter === 3) {
-    obj.sound.play('end')
-  }
-  obj.cirlcebar.setProgress(counter / 300 * 100)
-  const text = obj.timer.getCounterText(true)
-  el.timer_text.innerHTML = text.minutes + "<span>:</span>" + text.seconds
-})
-obj.timer.on("stop", () => {
-  //console.log("timer stop")
-  obj.sound.stop('end')
-  obj.screenwake.unlock()
-})
-
-
-obj.clock.on("tick", pause => {
-  //if (navigator.getCurrent() !== 'clock' && navigator.getCurrent() !== '') return
-  if (pause)
-  obj.sound.play('tick')
-})
-
-obj.slidebutton.on("start", () => {
-  obj.clock.pause()
-})
-obj.slidebutton.on("move", x => {
-  //console.log(x)
-  // x * 50 <-- sensitivity
-  if (x !== 0) obj.clock.addMilliSeconds(x * 50)
-})
-obj.slidebutton.on("stop", () => {
-  obj.clock.continue()
-})
-
-const navigator = new Navigation([
-  {
-    target: "",
-    on: () => {
-      //console.log("navigate: ..")
-      obj.timer.stop()
-      view.error.classList.add("hidden")
-      view.clock.classList.remove("hidden")  
-      view.timer.classList.add("hidden")  
-    }
-  },
-  {
-    target: "clock",
-    on: () => { 
-      obj.timer.stop()
-      //console.log("navigate: clock")
-      view.error.classList.add("hidden")
-      view.clock.classList.remove("hidden")  
-      view.timer.classList.add("hidden")  
-    }
-  },
-  {
-    target: "timer", 
-    on: () => {
-      //console.log("navigate: timer")
-      obj.timer.start(obj.clock.getTime())
-      view.error.classList.add("hidden")
-      view.clock.classList.add("hidden")
-      view.timer.classList.remove("hidden")  
-    }
-  }
 ])
 
 
-document.querySelector('.button_start')
-  .addEventListener("click", () => {
-    navigator.navigate("timer")
-  })
-
-document.querySelector('.button_stop')
-  .addEventListener("click", () => {
-    //navigator.navigate("")
-    navigator.navigateBack()
-  })
+/*TODO use silent audio to force screen on*/
 
 
+// define views ..
+const views = {
+	idle: document.querySelector('.view_idle'),
+	play: document.querySelector('.view_play'),
+	players: document.querySelector('.view_players')
+}
 
 
-screen.orientation.lock("portrait")
+// render views and overlay ..
+new Idle(views.idle)
+const player = new Player(views.players)
+new Play(views.play)
+new Overlay(document.querySelector(".overlay"))
+
+
+// display views based on navigation ..
+// start timer if its not running ..
+models.navigator.on('changed', e => {
+	//if (e === 'timer') models.timer.startIfNotRunning(models.clock.getTime())
+	Object.keys(views).forEach(view => {
+		if (view === e) views[view].classList.remove('hidden')
+		else views[view].classList.add('hidden')
+	})
+})
+
+
+// update round according to players loaded initially ..
+models.round.update()
+
+
+models.round.on('state', playing => {
+	//console.log("round playing: ", playing)
+	if (playing) {
+		// set screelock if playing starts ..
+		models.screenwake.lock()
+	} else {
+		// disable sound and screelock if playing is stops ..
+		models.sound.stop('end')
+		models.screenwake.unlock()
+	}
+})
+
+// at the end of a round jump to player selection ..
+models.round.on('finish', () => {
+	player.setBuildMode()
+	models.navigator.navigate('players')
+})
+
+
+// update again on players change ..
+models.players.on('added', () => {
+	models.round.update()
+})
+models.players.on('deleted', () => {
+	models.round.update()
+})
+models.players.on('changed', () => {
+	models.round.update()
+})
+
+
+// start round if timer starts ..
+models.timer.on("start", counter => {
+	//console.log("timer start")
+	models.round.start()
+})
+// play sound for timer countdown ..
+// update round on zero timer ..
+models.timer.on("tick", counter => {
+	//console.log("timer tick: ", counter, models.round.playing)
+	if (!models.round.playing) return
+	if (counter === 3) {
+		models.sound.play('end')
+	}
+	if (counter === 0) {
+		models.round.next()
+	}
+})
+// disable sound and screelock if timer is stops ..
+models.timer.on("stop", () => {
+	//console.log("timer stop")
+})
+
+
+// if the clock has changed by adjusting, set timer an force a tick ..
+models.clock.on('changed', time => {
+	models.timer.sync(time)
+})
+
+
+/*try {
+screen.orientation.lock("portrait").then().catch()
+}
+catch {}*/
+
+// if there is no round active, go to player selection immediately ..
+if (models.round.getInfo().round >= 1) {} else {
+	models.navigator.navigate('players')
+}
+
+// start timer
+models.timer.startIfNotRunning(models.clock.getTime())
+
 
 window.addEventListener("load", () => {
     if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("service-worker.js");
+      navigator.serviceWorker.register("service-worker.js")
     }
-});
+})
