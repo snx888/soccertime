@@ -1,6 +1,6 @@
 export default class Players {
 
-    #localStorageName = "soccertime_players"
+    #localStorageName = 'soccertime_players'
     #players = []
     #nextId = 0
     #listener = {

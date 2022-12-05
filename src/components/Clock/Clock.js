@@ -24,9 +24,9 @@ export default class {
 
         this.#el = {
             root: root,
-            hours: root.querySelector(".clock__hours"),
-            minutes: root.querySelector(".clock__minutes"),
-            seconds: root.querySelector(".clock__seconds"),
+            hours: root.querySelector('.clock__hours'),
+            minutes: root.querySelector('.clock__minutes'),
+            seconds: root.querySelector('.clock__seconds'),
         }
 
         models.timer.on('start', counter => {
@@ -36,8 +36,8 @@ export default class {
             this.#updateTime()
         })
 
-        const slider_sec = new Slider(root.querySelector(".clock__slider_sec"))
-        const slider_min = new Slider(root.querySelector(".clock__slider_min"))
+        const slider_sec = new Slider(root.querySelector('.clock__slider_sec'))
+        const slider_min = new Slider(root.querySelector('.clock__slider_min'))
         slider_sec.on('start', this.#adjustStart) 
         slider_sec.on('move', this.#adjustSec) 
         slider_sec.on('stop', this.#adjustEnd) 

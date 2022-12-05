@@ -15,16 +15,15 @@ import ModelRound from './models/Round.js'
 
 import models from './models/index..js'
 
+// for test purposes only ..
+//localStorage.clear()
 
-localStorage.clear()
-
-// dedfine models ..
+// define models ..
 models.navigator = new ModelNavigator([
 	'idle', 'players', 'play'
 ])
 models.clock = new ModelClock()
 models.players = new ModelPlayers(PLAYERS)
-/*TODO 300 sekunden via settings*/
 models.timer = new ModelTimer()
 models.round = new ModelRound()
 models.screenwake = new ModelScreenWake()
@@ -34,8 +33,6 @@ models.sound = new ModelSound([
     { id: 'tick', url: './res/tick.mp3' }
 ])
 
-
-/*TODO use silent audio to force screen on*/
 
 
 // define views ..

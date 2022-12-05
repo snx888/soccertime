@@ -1,4 +1,4 @@
-import { DEV } from "../../settings.js"
+import { DEV } from '../../settings.js'
 import models from '../../models/index..js'
 import Timer from '../../components/Timer/Timer.js'
 import Games from '../../components/Games/Games.js'
@@ -26,37 +26,37 @@ export default class {
 
         this.#el = {
             root: root,
-            delete: root.querySelector('.sync__button_delete'),
-            offset: root.querySelector('.sync__button_offset')
+            buttonStopRound: root.querySelector('.sync__button_stop_round'),
+            buttonDeleteOffset: root.querySelector('.sync__button_delete_offset')
+        }
+            
+        if (!DEV) {
+            this.#el.buttonStopRound.style.display = 'none'
+            this.#el.buttonDeleteOffset.style.display = 'none'
         }
 
         root.querySelector('.sync__button_start')
-            .addEventListener("click", () => {
+            .addEventListener('click', () => {
                 models.round.playing = true
-                models.navigator.navigate("play")
+                models.navigator.navigate('play')
             })
         root.querySelector('.sync__button_players')
-            .addEventListener("click", () => {
-                models.navigator.navigate("players")
+            .addEventListener('click', () => {
+                models.navigator.navigate('players')
             })
-        this.#el.delete
-            .addEventListener("click", () => {
+        this.#el.buttonStopRound
+            .addEventListener('click', () => {
                 models.round.stop()
             })
-        this.#el.offset
-            .addEventListener("click", () => {
+        this.#el.buttonDeleteOffset
+            .addEventListener('click', () => {
                 models.clock.clearOffset()
             })
 
-        new Timer(root.querySelector(".sync__timer"))
-        new Games(root.querySelector(".sync__games"))
-        new Teams(root.querySelector(".sync__teams"))
-        new Clock(root.querySelector(".sync__clock"))
-    
-        if (!DEV) {
-            this.#el.delete.style.display = 'none'
-            this.#el.offset.style.display = 'none'
-        }
+        new Timer(root.querySelector('.sync__timer'))
+        new Games(root.querySelector('.sync__games'))
+        new Teams(root.querySelector('.sync__teams'))
+        new Clock(root.querySelector('.sync__clock'))
     }
 
 }
