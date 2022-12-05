@@ -1,4 +1,4 @@
-import { VERSION, DEV } from "../../settings.js"
+import { VERSION, DEV } from '../../settings.js'
 import models from '../../models/index..js'
 
 const template = await fetch(
@@ -22,14 +22,15 @@ export default class {
 
         this.#el = {
             root: root,
-            version: root.querySelector(".overlay__version"),
-            screenwake: root.querySelector(".overlay__state .state_screenwake span"),
-            sound: root.querySelector(".overlay__state .state_sound span"),
-            playing: root.querySelector(".overlay__state .state_playing span"),
-            roundInfo: root.querySelector(".overlay__state .state_roundinfo"),
-            round: root.querySelector(".overlay__state .state_round"),
-            game: root.querySelector(".overlay__state .state_game"),
-            part: root.querySelector(".overlay__state .state_part")
+            state: root.querySelector('.overlay__state'),
+            version: root.querySelector('.overlay__version'),
+            screenwake: root.querySelector('.overlay__state .state_screenwake span'),
+            sound: root.querySelector('.overlay__state .state_sound span'),
+            playing: root.querySelector('.overlay__state .state_playing span'),
+            roundInfo: root.querySelector('.overlay__state .state_roundinfo'),
+            round: root.querySelector('.overlay__state .state_round'),
+            game: root.querySelector('.overlay__state .state_game'),
+            part: root.querySelector('.overlay__state .state_part')
         }
 
         this.#el.version.textContent = VERSION + (DEV ? ' (dev)' : '')
@@ -50,22 +51,22 @@ export default class {
                 : '.1'
         })
 
-        models.sound.on("test", successfull => {
+        models.sound.on('test', successfull => {
             this.#el.sound.textContent = successfull ? 'volume_up' :'volume_off'
         })
 
-        models.sound.on("start", id => {
-            //console.log("play sound", id)
+        models.sound.on('start', id => {
+            //console.log('play sound', id)
             this.#el.sound.style.opacity = '.4'
         })
 
-        models.sound.on("end", id => {
-            //console.log("end sound", id)
+        models.sound.on('end', id => {
+            //console.log('end sound', id)
             this.#el.sound.style.opacity = '.1'
         })
 
-        models.sound.on("stop", id => {
-            //console.log("stop sound", id)
+        models.sound.on('stop', id => {
+            //console.log('stop sound', id)
             this.#el.sound.style.opacity = '.1'
         })
 
@@ -75,14 +76,14 @@ export default class {
 
         this.#updateRound(models.round.getInfo())
         /*root.querySelector('.test')
-            .addEventListener("click", () => {
+            .addEventListener('click', () => {
                 models.round.start()
             })*/
     }
 
     #updateRound (e) {
-        if (!DEV) { 
-            this.#el.roundInfo.style.opacity = '0'
+        if (!DEV) {
+            this.#el.state.style.display = 'none'
             return
         }
         //console.log('update overlay round', e)
