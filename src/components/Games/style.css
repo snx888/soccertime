@@ -1,0 +1,26 @@
+.games__parts {
+    position: absolute;
+    left: 0;
+    top: var(--frame-y);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+}
+.games__parts .game {
+    padding: .5em .2em;
+    display: flex;
+    justify-content: center;
+    gap: .5em;
+}
+.games__parts .part {
+    height: .5em;
+    width: .5em;
+    border-radius: 50%;
+    border: 2px solid var(--onPrimary);
+    background: var(--onPrimary);
+    opacity: .4;
+}
+.games__parts .part.active {
+    opacity: 1;
+}

@@ -19,6 +19,7 @@ a vanilla js webapp providing a 5min timer synced to a real clock
 
 ### release change info
 - v0.7 ...
+  - fixed issue #009 (window blur stops wakelock)
 - v0.6 2022/03/06
   - fixed issue #008 (timeout stop/delay on device sleep)
   - folder structure rearranged

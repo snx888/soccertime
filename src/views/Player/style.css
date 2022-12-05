@@ -1,0 +1,132 @@
+.player__container {
+    width: 100%;
+    height: 100%;
+}
+.player__list {
+    padding: var(--frame-y) var(--frame-x);
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    gap: var(--frame-x);
+}
+.player__container input {
+    appearance: none;
+    margin: 0;
+}
+.player__container label {
+    border: 2px solid var(--onBackground);
+    border-radius: 0.15em;
+    padding: 1em;
+}
+.player__container:not(.manageMode) label:has(input:checked) {
+    color: var(--onPrimary);
+    background: var(--primary);
+    border-color: var(--onPrimary);
+}
+.player__container aside {
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+    margin-top: 1em;
+}
+.player__container label .material-icons {
+    display: none;
+    font-size: 1em;
+    padding-left: .2em;
+    transform: translateY(3px);
+    color: var(--bad);
+}
+.player__button_ok {
+    display: none;
+}
+.player__button_teams {
+    display: none;
+    background: var(--primary) !important;
+    color: var(--onPrimary) !important;
+}
+
+.player__manage {
+    display: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+.player__select,
+.player__manage {
+    margin-top: var(--frame-y);
+}
+.player__manage h1 {
+    padding: 0 1em;
+}
+.player__next {
+    display: none;
+    color: var(--warn);
+}
+.player__teams {
+    display: none;
+    color: var(--primary);
+}
+
+.player__input_name {
+    font: inherit;
+    color: var(--onBackground);
+    padding: .6em;
+    padding-right: 2em;
+    background: none;
+    border: none;
+    border-bottom: 2px solid var(--onBackground);
+    outline: none;
+    width: 8em;
+    transform: translateX(17px);
+}
+
+.player__input_name:hover {
+    border-color: var(--onPrimary);
+}
+
+.player__button_add {
+    width: 30px;
+    height: 25px;
+    padding: 0;
+    background: var(--primary);
+    color: var(--onPrimary);
+    border: none;
+    border-radius: 5%;
+    transform: translate(-17px, 8px);
+}
+
+.player__container.manageMode .player__manage {
+    display: flex;
+}
+.player__container.manageMode .player__select,
+.player__container.manageMode .player__next {
+    display: none;
+}
+.player__container.manageMode ~ footer .player__button_manage {
+    display: none;
+}
+.player__container.manageMode label .material-icons {
+    display: inline-block;
+}
+
+.player__container.buildMode ~ footer .player__button_back,
+.player__container.buildMode ~ footer .player__button_manage {
+    display: none;
+}
+.player__container.buildMode ~ footer .player__button_teams {
+    display: block;
+}
+.player__container.buildMode .player__teams {
+    display: inherit;
+}
+
+.player__container.nextMode .player__next {
+    display: inherit;
+}
+
+@media screen and (min-height: 600px) {
+    .player__manage h1 {
+        margin-bottom: var(--frame-y);
+    }  
+}
